@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+
+%post
+    apt-get update && apt-get install -y git wget unzip python3-pip
+    pip install --upgrade pip
+    pip install torch torchvision scikit-learn tqdm matplotlib pyyaml wandb
+
+%environment
+    export PYTHONUNBUFFERED=1
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%labels
+    Author YOUR_NAME
+    Version MACL-v1.0
+
+%runscript
+    exec python3 /MACL/scripts/train.py "$@"

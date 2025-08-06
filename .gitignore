@@ -205,3 +205,63 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+
+
+
+
+
+
+### AIR668: 避免上传 .sif 等大文件
+# Ignore Apptainer/Singularity image files
+*.sif
+*.img
+*.sandbox
+
+# Python cache and logs
+__pycache__/
+*.py[cod]
+*.so
+*.log
+
+# VSCode settings
+.vscode/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Dataset & experiment output
+data/
+results/
+outputs/
+checkpoints/
+*.pth
+*.pt
+
+# WandB logs
+wandb/
+wandb-debug.log
+wandb-metadata.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+Pipfile.lock
+poetry.lock
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Config backups
+*.bak
+*.old
+*.tmp
