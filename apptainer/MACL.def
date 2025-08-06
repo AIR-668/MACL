@@ -4,7 +4,15 @@ From: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
 %post
     apt-get update && apt-get install -y git wget unzip python3-pip
     pip install --upgrade pip
+
+    # 核心库
     pip install torch torchvision scikit-learn tqdm matplotlib pyyaml wandb
+
+    # Hugging Face 支持
+    pip install datasets huggingface_hub
+
+    # 可选（更好 CLI 体验，避免 bad interpreter 错误）
+    pip install click
 
 %environment
     export PYTHONUNBUFFERED=1
@@ -12,8 +20,8 @@ From: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
     export LANG=C.UTF-8
 
 %labels
-    Author YOUR_NAME
-    Version MACL-v1.0
+    Author chengjie.zheng001
+    Version MACL-v1.1
 
 %runscript
     exec python3 /MACL/scripts/train.py "$@"
