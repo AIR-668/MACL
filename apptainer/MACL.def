@@ -2,26 +2,33 @@ Bootstrap: docker
 From: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
 
 %post
-    apt-get update && apt-get install -y git wget unzip python3-pip
-    pip install --upgrade pip
+    apt update && apt install -y git wget curl nano vim unzip
 
-    # 核心库
-    pip install torch torchvision scikit-learn tqdm matplotlib pyyaml wandb
+    # pip & Python utils
+    pip install --upgrade pip setuptools
 
-    # Hugging Face 支持
+    # 深度学习 & 可视化
+    pip install \
+        jupyterlab notebook ipykernel \
+        matplotlib seaborn pandas scikit-learn tqdm \
+        tensorboard wandb \
+        einops timm opencv-python \
+        pyrootutils \
+        ipywidgets jupyterlab_widgets \
+        jupyter_contrib_nbextensions
+
+    # Few-Shot 学习相关支持
+    pip install faiss-cpu
+
+    # Hugging Face Dataset 支持
     pip install datasets huggingface_hub
 
-    # 可选（更好 CLI 体验，避免 bad interpreter 错误）
-    pip install click
+    # Git Python 接口（可选）
+    pip install GitPython
 
 %environment
     export PYTHONUNBUFFERED=1
-    export LC_ALL=C.UTF-8
-    export LANG=C.UTF-8
-
-%labels
-    Author chengjie.zheng001
-    Version MACL-v1.1
+    export PATH=/opt/conda/bin:$PATH
 
 %runscript
-    exec python3 /MACL/scripts/train.py "$@"
+    jupyter lab --no-browser --ip=0.0.0.0 --port=8888 --allow-root
