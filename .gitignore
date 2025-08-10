@@ -265,3 +265,5 @@ dist/
 *.bak
 *.old
 *.tmp
+# AIR668
+.Trash-1204471/
